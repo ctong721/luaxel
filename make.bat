@@ -1,0 +1,1 @@
+gcc luaxel.c -lSDL2 -lSDL2main -llua -lSDL2_image -o luaxel
