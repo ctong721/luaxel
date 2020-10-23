@@ -13,13 +13,12 @@ SDL_Texture* texture;
 SDL_Surface* gScreenSurface;
 SDL_Event evt;
 
-//函数
 static int p(lua_State* l)
 {
 	printf("%s",(char*)lua_tostring(l,1));
 	return 0;
 }
-//SDL
+
 static int init(lua_State* l)
 {
 	char* title = (char*)lua_tostring(l,1);
@@ -27,23 +26,22 @@ static int init(lua_State* l)
 	int h = (int)lua_tonumber(l,3);
 	
 	if (SDL_Init(SDL_INIT_EVERYTHING) == -1)
-    {
+	{
 		printf("err1");
-        return -1;
-    }
+        	return -1;
+	}
 	
 	window = SDL_CreateWindow(title,
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
         w, h, SDL_WINDOW_SHOWN);
-    if (window == NULL)
-    {
+	if (window == NULL)
+	{
 		printf("err2");
-        return -2;
-    }
+        	return -2;
+	}
 	gScreenSurface = SDL_GetWindowSurface(window);
 	//引入image库
 	IMG_Init(IMG_INIT_JPG);
-	
 	return 0;
 }
 
@@ -62,15 +60,15 @@ static int img(lua_State* l)
 	Uint32 key = SDL_MapRGB(gScreenSurface->format,0xff,0xff,0xff);
 	SDL_SetColorKey(pic,LWA_COLORKEY,key);
 	SDL_Rect r1;
-    r1.x = x1;
-    r1.y = y1;
-    r1.w = w1;
-    r1.h = h1;
+	r1.x = x1;
+	r1.y = y1;
+	r1.w = w1;
+	r1.h = h1;
 	SDL_Rect r2;
-    r2.x = x2;
-    r2.y = y2;
-    r2.w = w2;
-    r2.h = h2;
+	r2.x = x2;
+	r2.y = y2;
+	r2.w = w2;
+	r2.h = h2;
 	SDL_BlitSurface(pic, &r1, gScreenSurface, &r2);
 	SDL_FreeSurface(pic);
 	SDL_UpdateWindowSurface(window);
